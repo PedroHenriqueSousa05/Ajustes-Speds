@@ -829,6 +829,35 @@ namespace ProjetosEngage.Classes
 
             }
         }
+        public void corrgirVlPisCofins(ArquivoEFDContribuicoes _SpedContribuicoes)
+        {
+            foreach (RegistroC010 rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
+            {
+                foreach (var c100 in rc010.RegC100s)
+                {
+                    decimal totalPis = 0;
+                    decimal totalCofins = 0;
+                    if (c100.RegC170s is not null)
+                    {
+                        foreach (var c170 in c100.RegC170s)
+                        {
+                            if (c170.CstPis != 05 || c170.CstPis != 75)
+                            {
+                                totalPis += c170.VlPis;
+                            }
+
+                            if (c170.CstCofins != 05 || c170.CstCofins != 75)
+                            {
+                                totalCofins += c170.VlCofins;
+                            }
+
+                        }
+                        c100.VlPis = totalPis;
+                        c100.VlCofins = totalCofins;
+                    }
+                }
+            }
+        }
         public void ajusteC190(ArquivoEFDFiscal _SpedFiscal)
         {
             //Soma os valores dos registros C190 iguais e exclui o registro cópia (soluciona o erro de duplicidade nas chaves: CstIcms, CFOP, AliqIcms)
