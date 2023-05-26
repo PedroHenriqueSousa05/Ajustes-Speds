@@ -201,78 +201,81 @@ namespace ProjetoSpeds.Funções
         {
             foreach (var r0140 in _SpedContribuicoes.Bloco0.Reg0001.Reg0140s)
             {
-                foreach (var r0200 in r0140.Reg0200s)
+                if (r0140.Reg0200s is not null)
                 {
-                    if (r0200.Reg0205s != null && r0200.Reg0205s.Count > 1)
+                    foreach (var r0200 in r0140.Reg0200s)
                     {
-                        for (int i = 0; i < r0200.Reg0205s.Count; i++)
+                        if (r0200.Reg0205s != null && r0200.Reg0205s.Count > 1)
                         {
-                            for (int j = i + 1; j < r0200.Reg0205s.Count; j++)
+                            for (int i = 0; i < r0200.Reg0205s.Count; i++)
                             {
-                                var r205A = r0200.Reg0205s[i];
-                                var r205B = r0200.Reg0205s[j];
-
-                                if (r205A.DtIni <= r205B.DtFin && r205B.DtIni <= r205A.DtFin)
+                                for (int j = i + 1; j < r0200.Reg0205s.Count; j++)
                                 {
-                                    if (r205A.DtFin.Day == DateTime.DaysInMonth(r205A.DtFin.Year, r205A.DtFin.Month))
+                                    var r205A = r0200.Reg0205s[i];
+                                    var r205B = r0200.Reg0205s[j];
+
+                                    if (r205A.DtIni <= r205B.DtFin && r205B.DtIni <= r205A.DtFin)
                                     {
-                                        r205B.DtIni = r205A.DtFin.AddDays(1);
-                                    }
-                                    else if (r205B.DtFin.Day == DateTime.DaysInMonth(r205B.DtFin.Year, r205B.DtFin.Month))
-                                    {
-                                        r205A.DtFin = r205B.DtIni.AddDays(-1);
-                                    }
-                                    else
-                                    {
-                                        var midDate = r205A.DtFin.AddDays(1);
-                                        r205B.DtIni = midDate;
-                                        r205B.DtFin = r205B.DtFin.AddDays(midDate.Month == r205B.DtFin.Month ? 1 : -r205B.DtFin.Day + 1);
+                                        if (r205A.DtFin.Day == DateTime.DaysInMonth(r205A.DtFin.Year, r205A.DtFin.Month))
+                                        {
+                                            r205B.DtIni = r205A.DtFin.AddDays(1);
+                                        }
+                                        else if (r205B.DtFin.Day == DateTime.DaysInMonth(r205B.DtFin.Year, r205B.DtFin.Month))
+                                        {
+                                            r205A.DtFin = r205B.DtIni.AddDays(-1);
+                                        }
+                                        else
+                                        {
+                                            var midDate = r205A.DtFin.AddDays(1);
+                                            r205B.DtIni = midDate;
+                                            r205B.DtFin = r205B.DtFin.AddDays(midDate.Month == r205B.DtFin.Month ? 1 : -r205B.DtFin.Day + 1);
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    if (r0200.Reg0205s is not null)
-                    {
-                        foreach (var r205 in r0200.Reg0205s)
+                        if (r0200.Reg0205s is not null)
                         {
-                            if (r205.CodAntItem is not null && r205.DescrAntItem is not null)
+                            foreach (var r205 in r0200.Reg0205s)
                             {
-                                if (r0200.Reg0205s.Count == 1 || r205.Equals(r0200.Reg0205s.First()))
+                                if (r205.CodAntItem is not null && r205.DescrAntItem is not null)
                                 {
-                                    r205.CodAntItem = null;
+                                    if (r0200.Reg0205s.Count == 1 || r205.Equals(r0200.Reg0205s.First()))
+                                    {
+                                        r205.CodAntItem = null;
+                                    }
+                                    else
+                                    {
+                                        r205.DescrAntItem = null;
+                                    }
                                 }
-                                else
+                                else if (r205.CodAntItem is not null)
                                 {
-                                    r205.DescrAntItem = null;
+                                    if (r0200.Reg0205s.Count == 1 || r205.Equals(r0200.Reg0205s.First()))
+                                    {
+                                        r205.CodAntItem = null;
+                                    }
+                                    else
+                                    {
+                                        r205.DescrAntItem = null;
+                                    }
                                 }
-                            }
-                            else if (r205.CodAntItem is not null)
-                            {
-                                if (r0200.Reg0205s.Count == 1 || r205.Equals(r0200.Reg0205s.First()))
+                                else if (r205.DescrAntItem is not null)
                                 {
-                                    r205.CodAntItem = null;
+                                    if (r0200.Reg0205s.Count == 1 || r205.Equals(r0200.Reg0205s.First()))
+                                    {
+                                        r205.DescrAntItem = null;
+                                    }
+                                    else
+                                    {
+                                        r205.CodAntItem = null;
+                                    }
                                 }
-                                else
-                                {
-                                    r205.DescrAntItem = null;
-                                }
-                            }
-                            else if (r205.DescrAntItem is not null)
-                            {
-                                if (r0200.Reg0205s.Count == 1 || r205.Equals(r0200.Reg0205s.First()))
-                                {
-                                    r205.DescrAntItem = null;
-                                }
-                                else
-                                {
-                                    r205.CodAntItem = null;
-                                }
-                            }
 
-                            if (r205.DtIni < new DateTime(2003, 01, 01))
-                            {
-                                r205.DtIni = new DateTime(2022, 09, 01);
+                                if (r205.DtIni < new DateTime(2003, 01, 01))
+                                {
+                                    r205.DtIni = new DateTime(2022, 09, 01);
+                                }
                             }
                         }
                     }
@@ -298,21 +301,24 @@ namespace ProjetoSpeds.Funções
             }
             foreach(Registro0140 rc0140 in _SpedContribuicoes.Bloco0.Reg0001.Reg0140s)
             {
-                foreach(var rc0200 in rc0140.Reg0200s)
+                if (rc0140.Reg0200s is not null)
                 {
-                    if (listaCodItem.Contains(rc0200.CodBarra))
+                    foreach (var rc0200 in rc0140.Reg0200s)
                     {
-                        foreach (RegistroC010 c010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
+                        if (listaCodItem.Contains(rc0200.CodBarra))
                         {
-                            foreach (var c100 in c010.RegC100s)
+                            foreach (RegistroC010 c010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
                             {
-                                if (c100.RegC170s is not null)
+                                foreach (var c100 in c010.RegC100s)
                                 {
-                                    foreach (var c170 in c100.RegC170s)
+                                    if (c100.RegC170s is not null)
                                     {
-                                        if (c170.CodItem == rc0200.CodBarra)
+                                        foreach (var c170 in c100.RegC170s)
                                         {
-                                            c170.CodItem = rc0200.CodItem;
+                                            if (c170.CodItem == rc0200.CodBarra)
+                                            {
+                                                c170.CodItem = rc0200.CodItem;
+                                            }
                                         }
                                     }
                                 }
@@ -324,10 +330,12 @@ namespace ProjetoSpeds.Funções
             List<string> lista0150 = new List<string>();
             foreach(Registro0140 rc140 in _SpedContribuicoes.Bloco0.Reg0001.Reg0140s)
             {
-                foreach(var rc0150 in rc140.Reg0150s)
+                if (rc140.Reg0150s is not null)
                 {
-                    lista0150.Add(rc0150.CodPart);
-
+                    foreach (var rc0150 in rc140.Reg0150s)
+                    {
+                        lista0150.Add(rc0150.CodPart);
+                    }
                 }
             }
             foreach(RegistroC010 rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
@@ -366,489 +374,6 @@ namespace ProjetoSpeds.Funções
             /*var c100 = _SpedContribuicoes.BlocoC.RegC001.RegC010s.SelectMany(x => x.RegC100s).Where(x => x.DtEs == Convert.ToDateTime("02/02/2002")).ToList();
             c100.ForEach(x => { x.DtEs = x.DtDoc; x.CodSit = 1; });*/
         }
-        public void ajusteC170(ArquivoEFDContribuicoes _SpedContribuicoes)
-        {
-
-            var valorIPI = dic_aux.valor_IPI_Compras_chave_item();
-            var baseIPI = dic_aux.base_IPI_Compras_chave_item();
-            var percentualIPI = dic_aux.percentual_IPI_Compras_chave_item();
-            var listaFrete = dic_aux.ajusteFrete();
-
-            /*string diretorioOrigem = "C:\\Users\\Micro\\Documents\\origm";
-            string arquivoExcel = "C:\\Users\\Micro\\Desktop\\Speds\\Pasta1.xlsx";
-            decimal valorFrete = 0m;
-            decimal valorprod = 0m;
-            // Define a codificação a ser usada
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            Encoding encoding = Encoding.GetEncoding("iso-8859-1");
-
-            // Lê o arquivo do Excel e carrega os valores de ID em uma lista
-            var listaId = new List<string>();
-            using (var stream = File.Open(arquivoExcel, FileMode.Open, FileAccess.Read))
-            {
-                using (var reader = ExcelReaderFactory.CreateReader(stream, new ExcelReaderConfiguration() { FallbackEncoding = encoding }))
-                {
-
-                    DataSet dataSet = reader.AsDataSet();
-                    System.Data.DataTable dataTable = dataSet.Tables[0];
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        string id = row.Field<string>("Column0");
-                        if (!string.IsNullOrWhiteSpace(id))
-                        {
-                            listaId.Add(id);
-                        }
-                    }
-                }
-            }
-
-            string[] arquivos = Directory.GetFiles(diretorioOrigem, "*.xml");
-            
-            
-            /*foreach (string arquivo in arquivos)
-            {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(arquivo);
-                int contadorItens = 0;
-                
-                var NFe = PopulaNFe(xmlDoc.InnerXml);
-                if (listaId.Contains(NFe.NFe.infNFe.Id.Substring(3,44)))
-                {
-
-                    foreach (var rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
-                    {
-                        foreach (var rc100 in rc010.RegC100s)
-                        {
-                            int contadorRegistrosC170 = 0;
-                            var chave = rc100.ChvNfe;
-                            var rc170 = rc100.RegC170s;
-                            var registrosC190 = rc100.RegC170s
-                            .GroupBy(r => new {r.Cfop})
-                            .Where(g => g.Count() > 1);
-
-                            if (rc170 is not null)
-                            {
-                                contadorRegistrosC170 += rc170.Count;
-                                
-                                if (contadorRegistrosC170 > 1 && chave == NFe.NFe.infNFe.Id.Substring(3, 44))
-                                {
-                                    decimal valorFreteAtual = NFe.NFe.infNFe.det[0].prod.vFrete.Value;
-                                    decimal valorItemAtual = NFe.NFe.infNFe.det[0].prod.vProd;
-                                    foreach (var rcs170 in rc170)
-                                    {
-                                            rcs170.VlItem = valorFreteAtual + valorItemAtual;
-
-                                        if (contadorItens < NFe.NFe.infNFe.det.Count - 1)
-                                        {
-                                            contadorItens++;
-                                            valorFreteAtual = NFe.NFe.infNFe.det[contadorItens].prod.vFrete.Value;
-                                            valorItemAtual = NFe.NFe.infNFe.det[contadorItens].prod.vProd;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            foreach (string arquivo in arquivos)
-            {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(arquivo);
-                int contadorItens = 0;
-                var NFe = PopulaNFe(xmlDoc.InnerXml);
-                if (listaId.Contains(NFe.NFe.infNFe.Id.Substring(3, 44)))
-                {
-                    foreach (var rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
-                    {
-                        foreach (var rc100 in rc010.RegC100s)
-                        {
-                            var chave = rc100.ChvNfe;
-                            var rc170 = rc100.RegC170s;
-
-                            if (rc170 is not null)
-                            {
-                                var registrosC170 = rc170
-                                    .GroupBy(r => new { r.CodCta})
-                                    .Where(g => g.Count() > 1);
-
-                                foreach (var grupoC170 in registrosC170)
-                                {
-                                    
-                                    if (chave == NFe.NFe.infNFe.Id.Substring(3, 44))
-                                    {
-                                        decimal valorFreteAtual = NFe.NFe.infNFe.det[0].prod.vFrete.Value;
-                                        decimal valorItemAtual = NFe.NFe.infNFe.det[0].prod.vProd;
-                                        foreach (var rcs170 in rc170)
-                                        {
-                                            rcs170.VlItem = valorFreteAtual + valorItemAtual;
-                                            if (contadorItens < NFe.NFe.infNFe.det.Count - 1)
-                                            {
-                                                contadorItens++;
-                                                valorFreteAtual = NFe.NFe.infNFe.det[contadorItens].prod.vFrete.Value;
-                                                valorItemAtual = NFe.NFe.infNFe.det[contadorItens].prod.vProd;
-                                            }
-                                        }
-                                    }
-                                    decimal valorTotalItem = grupoC170.Sum(r => r.VlItem);
-                                    rc100.VlMerc = valorTotalItem;
-                                }
-                            }
-                        }
-                    }
-                }
-            }*/
-
-            foreach (var rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
-            {
-                foreach (var rc100 in rc010.RegC100s)
-                {
-
-                    if (rc100.RegC170s is not null)
-                    {
-                        foreach (var rc170 in rc100.RegC170s)
-                        {
-                            if (rc170.CstCofins == 01 && rc170.Cfop == 6108 && rc170.AliqCofins == 0 && rc170.AliqPis == 0)
-                            {
-                                double aliqPis = 1.65;
-                                rc170.AliqPis = (decimal)aliqPis;
-
-                                double aliqCofins = 7.60;
-                                rc170.AliqCofins = (decimal)aliqCofins;
-                            }
-
-                            if (rc170.CstCofins == 01 && rc170.Cfop == 5102 && rc170.AliqCofins == 0 && rc170.AliqPis == 0)
-                            {
-                                double aliqPis = 1.65;
-                                rc170.AliqPis = (decimal)aliqPis;
-
-                                double aliqCofins = 7.60;
-                                rc170.AliqCofins = (decimal)aliqCofins;
-                            }
-
-                            if (string.IsNullOrEmpty(rc170.CodCta))
-                            {
-
-                                rc170.CodCta = "3-1-01-01-00001";
-                            }
-                        }
-                    }
-                }
-            }
-
-            foreach (var rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
-            {
-                foreach (var rc100 in rc010.RegC100s)
-                {
-
-                    Decimal rc100_vlmercadoria = 0;
-                    Decimal rc100_vlpis = 0;
-                    Decimal rc100_vlcofins = 0;
-
-                    if (rc100.DtDoc > rc100.DtEs)
-                    {
-                        rc100.DtEs = rc100.DtDoc;
-                    }
-
-                    if (rc100.RegC170s is not null && rc100.IndOper == 0)
-                    {
-
-
-                        foreach (var rc170 in rc100.RegC170s)
-                        {
-                            if (rc170.CstCofins != 05 && rc170.CstCofins != 75)
-                            {
-                                decimal totalPis = 0;
-                                decimal totalCofins = 0;
-                                foreach (var c170 in rc100.RegC170s)
-                                {
-                                    totalPis += c170.VlPis;
-                                    totalCofins += c170.VlCofins;
-                                }
-
-                                rc100.VlPis = totalPis;
-                                rc100.VlCofins = totalCofins;
-                            }
-                            /* cst menor que 50 é para notas de saida - cst 99 são outras entradas*/
-                            if (rc170.CstPis < 50 | rc170.CstCofins < 50)
-                            {
-                                rc170.CstPis = 99;
-                                rc170.CstCofins = 99;
-                            }
-
-                            /* 
-                             * 
-                             * FILIAL 002 ************************************************************************************************
-                             *
-                             */
-                            if (rc010.Cnpj == "24867555000284")
-                            {
-                                /* se tratando de devolução de venda, precisamos igualar o vlitem com o vlbcicms nos casos em que não houver redução da base de calculo - exceto cst 20*/
-
-                                if (rc170.Cfop == 1102 || rc170.Cfop == 2102)
-                                {
-                                    string aux = String.Concat(rc100.ChvNfe, rc170.CodItem);
-
-                                    if (valorIPI.TryGetValue(aux, out double value))
-                                    {
-                                        rc170.VlIpi = Convert.ToDecimal(value);
-                                    }
-
-                                    if (baseIPI.TryGetValue(aux, out double valuebase))
-                                    {
-                                        rc170.VlBcIpi = Convert.ToDecimal(valuebase);
-                                    }
-
-                                    if (percentualIPI.TryGetValue(aux, out double valuepercentual))
-                                    {
-                                        rc170.AliqIpi = Convert.ToDecimal(valuepercentual);
-                                    }
-                                    if(rc170.VlItem == 0)
-                                    {
-                                        rc170.VlItem = rc170.VlBcIcms;
-                                    }
-                                    //rc170.VlBcPis = rc170.VlBcIcms - rc170.VlIcms;
-                                    //rc170.VlBcCofins = rc170.VlBcIcms - rc170.VlIcms;
-                                    rc170.VlBcPis = rc170.VlItem;
-                                    rc170.VlBcCofins = rc170.VlItem;
-                                    rc170.VlPis = rc170.VlBcPis * Convert.ToDecimal(0.0165);
-                                    rc170.VlCofins = rc170.VlBcCofins * Convert.ToDecimal(0.0760);
-
-                                }
-                                else if (rc170.Cfop == 2202 | rc170.Cfop == 1202)
-                                {
-                                    if (rc170.VlItem != 0
-                                        && (rc170.CstIcms != 020 && rc170.CstIcms != 220 && rc170.CstIcms != 420 && rc170.CstIcms != 520))
-                                    {
-                                        rc170.VlItem = rc170.VlBcIcms;
-                                        rc170.VlBcPis = rc170.VlBcIcms;
-                                        rc170.VlBcCofins = rc170.VlBcIcms;
-                                    }
-                                    else if (rc170.VlItem != 0
-                                             && (rc170.CstIcms == 020 || rc170.CstIcms == 220 || rc170.CstIcms == 420 || rc170.CstIcms == 520))
-                                    {
-                                        //rc170.VlItem = rc170.VlItem - rc170.VlDesc + Convert.ToDecimal(rc100.VlFrt);
-                                        rc170.VlBcPis = rc170.VlItem;
-                                        rc170.VlBcCofins = rc170.VlItem;
-
-                                    }
-                                }
-
-
-                                /* não se tratando de Devoluções, posso usar a bcicms + bcipi como bcpis e bccofins*/
-
-                                else if (rc170.VlItem != 0 && rc170.VlBcIcms != 0 && (rc170.Cfop != 5202 && rc170.Cfop != 6202))
-                                {
-                                    rc170.VlBcPis = rc170.VlBcIcms + rc170.VlIpi;
-                                    rc170.VlBcCofins = rc170.VlBcIcms + rc170.VlIpi;
-                                    rc170.AliqPis = 1.65M;
-                                    rc170.AliqCofins = 7.60M;
-                                }
-                                else if (rc170.VlItem != 0 && rc170.VlBcIcms == 0)
-                                {
-                                    rc170.VlBcPis = rc170.VlItem;
-                                    rc170.VlBcCofins = rc170.VlItem;
-                                    rc170.AliqPis = 1.65M;
-                                    rc170.AliqCofins = 7.60M;
-                                }
-                            }
-
-                            /* 
-                             * 
-                             * MATRIZ ************************************************************************************************
-                             *
-                             */
-
-                            if (rc010.Cnpj == "24867555000101")
-                            {
-                                //rc170.VlItem = rc170.VlItem - rc170.VlDesc;
-
-                                if (rc170.CstPis < 50 | rc170.CstCofins < 50)
-                                {
-                                    rc170.CstPis = 99;
-                                    rc170.CstCofins = 99;
-                                }
-
-                                if ((rc170.Cfop == 2102 || rc170.Cfop == 1102))
-                                {
-
-                                    string aux = String.Concat(rc100.ChvNfe, rc170.CodItem);
-
-                                    if (valorIPI.TryGetValue(aux, out double value))
-                                    {
-                                        rc170.VlIpi = Math.Round(Convert.ToDecimal(value), 2);
-                                    }
-
-                                    if (baseIPI.TryGetValue(aux, out double valuebase))
-                                    {
-                                        rc170.VlBcIpi = Math.Round(Convert.ToDecimal(valuebase), 2);
-                                    }
-
-                                    if (percentualIPI.TryGetValue(aux, out double valuepercentual))
-                                    {
-                                        rc170.AliqIpi = Math.Round(Convert.ToDecimal(valuepercentual), 2);
-                                    }
-
-                                    rc170.VlBcPis = rc170.VlItem;
-                                    rc170.VlBcCofins = rc170.VlItem;
-                                }
-
-                                else if (rc170.VlItem >= rc170.VlBcPis && rc170.VlItem >= rc170.VlBcIcms && rc170.VlItem > 0 && rc170.VlBcPis > 0)
-                                {
-                                    rc170.VlItem = rc170.VlBcPis;
-                                }
-                                else if (rc170.VlItem == rc170.VlBcPis && rc170.VlItem <= rc170.VlBcIcms && rc170.VlItem > 0)
-                                {
-                                    rc170.VlItem = rc170.VlBcIcms;
-                                }
-                            }
-
-                            /* 
-                             * 
-                             * FILIAL 006 ************************************************************************************************
-                             *
-                             */
-
-                            if (rc010.Cnpj == "24867555000608")
-                            {
-                                rc170.VlItem = rc170.VlBcPis;
-                            }
-
-                            if (listaFrete.IndexOf(Convert.ToString(rc100.ChvNfe)) > -1)
-                            {
-                                rc170.VlItem = Math.Round(Convert.ToDecimal(rc170.VlItem) + Convert.ToDecimal(rc100.VlFrt), 2);
-                                rc170.VlBcPis = rc170.VlItem;
-                                rc170.VlBcCofins = rc170.VlItem;
-
-                            }
-
-                            //rc170.VlBcPis = rc170.VlBcIcms - rc170.VlIcms;
-                            //rc170.VlBcCofins = rc170.VlBcIcms - rc170.VlIcms;
-                            rc170.VlPis = rc170.VlBcPis * Convert.ToDecimal(0.0165);
-                            rc170.VlCofins = rc170.VlBcCofins * Convert.ToDecimal(0.0760);
-
-                            rc100_vlpis = rc100_vlpis + rc170.VlPis;
-                            rc100_vlcofins = rc100_vlcofins + rc170.VlCofins;
-                            rc100_vlmercadoria = rc100_vlmercadoria + rc170.VlItem;
-
-                        }
-                        rc100.VlMerc = rc100_vlmercadoria;
-                        rc100.VlPis = rc100_vlpis;
-                        rc100.VlCofins = rc100_vlcofins;
-                        rc100.VlMerc = rc100_vlmercadoria;
-
-
-                    }
-                    int contadorRegistrosC170 = 0;
-                    if (rc100.RegC170s is not null)
-                    {
-                        contadorRegistrosC170 += rc100.RegC170s.Count;
-                    }
-
-                    if (rc100.RegC170s is not null && rc100.IndOper == 1)
-                    {
-                        foreach (var rc170 in rc100.RegC170s)
-                        {
-
-                            if (rc170.CstPis > 49 | rc170.CstCofins > 49)
-                            {
-                                rc170.CstPis = 49;
-                                rc170.CstCofins = 49;
-                            }
-
-                            /* 
-                             * 
-                             * FILIAL 006 ************************************************************************************************
-                             *
-                             */
-                            if (rc010.Cnpj == "24867555000608")
-                            {
-                                if (rc170.Cfop == 1102 || rc170.Cfop == 2102)
-                                {
-                                    rc170.VlItem = rc170.VlBcIcms;
-                                }
-                                else
-                                {
-                                    rc170.VlItem = rc170.VlBcPis;
-                                }
-                            }
-
-                            /* 
-                             * 
-                             * MATRIZ ************************************************************************************************
-                             *
-                             */
-
-                            if (rc010.Cnpj == "24867555000101")
-                            {
-                                if (rc170.Cfop == 5202 || rc170.Cfop == 6202)
-                                {
-                                    rc170.VlBcPis = rc170.VlItem;
-                                    rc170.VlBcCofins = rc170.VlItem;
-                                }
-                                else
-                                {
-                                    rc170.VlItem = rc170.VlBcIcms;
-                                }
-
-                            }
-
-                            /* 
-                             * 
-                             * FILIAL 002 ************************************************************************************************
-                             *
-                             */
-                            if (rc010.Cnpj == "24867555000284")
-                            {
-                                if (rc170.Cfop == 5202 || rc170.Cfop == 6202)
-                                {
-                                    //rc170.VlItem = rc170.VlBcIcms;
-                                    rc170.VlBcPis = rc170.VlItem;
-                                    rc170.VlBcCofins = rc170.VlItem;
-                                    if (contadorRegistrosC170 == 1)
-                                    {
-                                        rc170.VlItem = rc100.VlDoc.Value;
-                                    }
-
-
-                                }
-                                //else if (rc170.Cfop == 6108)
-                                //{
-
-                                //    rc170.AliqPis = 1.65M;
-                                //    rc170.AliqCofins = 7.60M;
-
-                                //}
-                                else if ((rc170.Cfop == 5102 || rc170.Cfop == 6102 || rc170.Cfop == 6108) && rc170.VlBcIcms != 0)
-                                {
-                                    rc170.VlItem = rc170.VlBcIcms;
-
-                                }
-                            }
-                            rc100_vlmercadoria = rc100_vlmercadoria + rc170.VlItem;
-                            rc170.VlPis = rc170.VlBcPis * Convert.ToDecimal(0.0165);
-                            rc170.VlCofins = rc170.VlBcCofins * Convert.ToDecimal(0.0760);
-                            rc100_vlpis = rc100_vlpis + rc170.VlPis;
-                            rc100_vlcofins = rc100_vlcofins + rc170.VlCofins;
-
-
-                            if (listaFrete.IndexOf(Convert.ToString(rc100.ChvNfe)) > 0)
-                            {
-                                rc170.VlItem = Math.Round(Convert.ToDecimal(rc170.VlItem) + Convert.ToDecimal(rc100.VlFrt), 2);
-                            }
-
-                        }
-                        rc100.VlMerc = rc100_vlmercadoria;
-                        rc100.VlPis = rc100_vlpis;
-                        rc100.VlCofins = rc100_vlcofins;
-                        rc100.VlMerc = rc100_vlmercadoria;
-
-                    }
-
-                }
-            }
-        }
         public void ajusteCstC170(ArquivoEFDContribuicoes _SpedContribuicoes)
         {
             //ajustes COD SIT para notas sem valor de mercadorias
@@ -862,84 +387,6 @@ namespace ProjetoSpeds.Funções
                 SelectMany(x => x.RegC170s).ToList().Where(x => ((x.Cfop == 5102 || x.Cfop == 5106 || x.Cfop == 6102 || x.Cfop == 6106 || x.Cfop == 6108) && (x.CstPis != 1 || x.CstCofins != 1))).ToList();
             c170b.ForEach(x => { x.CstPis = 1; x.CstCofins = 1; });
         }
-<<<<<<< Updated upstream
-        public void excluirC100(ArquivoEFDContribuicoes _SpedContribuicoes)
-        {
-
-            var dicionarioC100 = new Dictionary<string, int>();
-
-            foreach (RegistroC010 c010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
-            {
-
-                foreach (var c100 in c010.RegC100s)
-                {
-                    var chave = $"{c100.IndOper}{c100.IndEmit}{c100.CodPart}{c100.CodMod}{c100.Ser}{c100.NumDoc}{c100.ChvNfe}";
-
-                    if (dicionarioC100.ContainsKey(chave))
-                    {
-                        dicionarioC100[chave]++;
-                    }
-                    else
-                    {
-                        dicionarioC100[chave] = 1;
-                    }
-                }
-            }
-
-            foreach (RegistroC010 c010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
-            {
-                foreach (var c100 in c010.RegC100s.ToList())
-                {
-                    var chave = $"{c100.IndOper}{c100.IndEmit}{c100.CodPart}{c100.CodMod}{c100.Ser}{c100.NumDoc}{c100.ChvNfe}";
-
-                    if (dicionarioC100[chave] > 1)
-                    {
-                        for (int i = c100.RegC170s.Count - 1; i >= 0; i--)
-                        {
-                            c100.RegC170s.RemoveAt(i);
-                        }
-                        c010.RegC100s.Remove(c100);
-                        
-                        dicionarioC100[chave]--;
-                    }
-                }
-            }
-        }
-        public void corrigirAliq(ArquivoEFDContribuicoes _SpedContribuicoes)
-        {
-            foreach (RegistroC010 rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
-            {
-                foreach (var rc100 in rc010.RegC100s)
-                {
-                    if (rc100.RegC170s is not null)
-                    {
-                        foreach (var rc170 in rc100.RegC170s)
-                        {
-                            if (rc170.CstCofins == 01 && rc170.Cfop == 6108 && rc170.AliqCofins == 0 && rc170.AliqPis == 0)
-                            {
-                                double aliqPis = 1.65;
-                                rc170.AliqPis = (decimal)aliqPis;
-
-                                double aliqCofins = 7.60;
-                                rc170.AliqCofins = (decimal)aliqCofins;
-                            }
-
-                            if (rc170.CstCofins == 01 && rc170.Cfop == 5102 && rc170.AliqCofins == 0 && rc170.AliqPis == 0)
-                            {
-                                double aliqPis = 1.65;
-                                rc170.AliqPis = (decimal)aliqPis;
-
-                                double aliqCofins = 7.60;
-                                rc170.AliqCofins = (decimal)aliqCofins;
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-=======
->>>>>>> Stashed changes
         public void ajusteC190(ArquivoEFDFiscal _SpedFiscal)
         {
             // Verifica se o arquivo do SPED Fiscal e o bloco C foram preenchidos corretamente
@@ -1177,58 +624,171 @@ namespace ProjetoSpeds.Funções
         }
         public void corrgirVlPisCofins(ArquivoEFDContribuicoes _SpedContribuicoes)
         {
-            foreach (RegistroC010 rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
+
+            var valorIPI = dic_aux.valor_IPI_Compras_chave_item();
+            var baseIPI = dic_aux.base_IPI_Compras_chave_item();
+            var percentualIPI = dic_aux.percentual_IPI_Compras_chave_item();
+            var listaFrete = dic_aux.ajusteFrete();
+
+            foreach (var rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
             {
-                foreach (var c100 in rc010.RegC100s)
+                foreach (var rc100 in rc010.RegC100s)
                 {
-                    decimal totalPis = 0;
-                    decimal totalCofins = 0;
-                    if (c100.RegC170s is not null)
+
+                    if (rc100.RegC170s is not null)
                     {
-                        foreach (var c170 in c100.RegC170s)
+                        foreach (var rc170 in rc100.RegC170s)
                         {
-                            if (c170.CstPis != 05 || c170.CstPis != 75)
+                            if (rc170.CstCofins == 01 && rc170.Cfop == 6108 && rc170.AliqCofins == 0 && rc170.AliqPis == 0)
                             {
-                                totalPis += c170.VlPis;
+                                double aliqPis = 1.65;
+                                rc170.AliqPis = (decimal)aliqPis;
+
+                                double aliqCofins = 7.60;
+                                rc170.AliqCofins = (decimal)aliqCofins;
                             }
 
-                            if (c170.CstCofins != 05 || c170.CstCofins != 75)
+                            if (rc170.CstCofins == 01 && rc170.Cfop == 5102 && rc170.AliqCofins == 0 && rc170.AliqPis == 0)
                             {
-                                totalCofins += c170.VlCofins;
-                            }
-                            int contadorRegistrosC170 = 0;
+                                double aliqPis = 1.65;
+                                rc170.AliqPis = (decimal)aliqPis;
 
-                            if (c100.RegC170s is not null)
-                            {
-                                contadorRegistrosC170 += c100.RegC170s.Count;
+                                double aliqCofins = 7.60;
+                                rc170.AliqCofins = (decimal)aliqCofins;
                             }
-                            if (c170.Cfop == 5202 || c170.Cfop == 6202)
+
+                            if (string.IsNullOrEmpty(rc170.CodCta))
                             {
-                                //rc170.VlItem = rc170.VlBcIcms;
-                                c170.VlBcPis = c170.VlItem;
-                                c170.VlBcCofins = c170.VlItem;
-                                if (contadorRegistrosC170 == 1)
+
+                                rc170.CodCta = "3-1-01-01-00001";
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
+            {
+                foreach (var rc100 in rc010.RegC100s)
+                {
+
+                    Decimal rc100_vlmercadoria = 0;
+                    Decimal rc100_vlpis = 0;
+                    Decimal rc100_vlcofins = 0;
+
+                    if (rc100.DtDoc > rc100.DtEs)
+                    {
+                        rc100.DtEs = rc100.DtDoc;
+                    }
+
+                    if (rc100.RegC170s is not null && rc100.IndOper == 0)
+                    {
+                        int contadorC170 = 0;
+                        foreach (var rc170 in rc100.RegC170s)
+                        {
+                            contadorC170++;
+                            if (rc170.CstCofins != 05 && rc170.CstCofins != 75)
+                            {
+                                decimal totalPis = 0;
+                                decimal totalCofins = 0;
+                                foreach (var c170 in rc100.RegC170s)
                                 {
-                                    c170.VlItem = c100.VlDoc.Value;
+                                    totalPis += c170.VlPis;
+                                    totalCofins += c170.VlCofins;
                                 }
 
+                                rc100.VlPis = totalPis;
+                                rc100.VlCofins = totalCofins;
                             }
-                            if (rc010.Cnpj == "24867555000101")
-                            { 
-                                if (c170.Cfop == 6106 && c170.VlItem != c100.VlMerc)
+                            /* cst menor que 50 é para notas de saida - cst 99 são outras entradas*/
+                            if (rc170.CstPis < 50 | rc170.CstCofins < 50)
+                            {
+                                rc170.CstPis = 99;
+                                rc170.CstCofins = 99;
+                            }
+
+                            if (rc170.Cfop == 1102 || rc170.Cfop == 2102)
+                            {
+                                string aux = String.Concat(rc100.ChvNfe, rc170.CodItem);
+
+                                if (valorIPI.TryGetValue(aux, out double value))
                                 {
-                                    if (contadorRegistrosC170 == 1)
+                                    rc170.VlIpi = Convert.ToDecimal(value);
+                                }
+
+                                if (baseIPI.TryGetValue(aux, out double valuebase))
+                                {
+                                    rc170.VlBcIpi = Convert.ToDecimal(valuebase);
+                                }
+
+                                if (percentualIPI.TryGetValue(aux, out double valuepercentual))
+                                {
+                                    rc170.AliqIpi = Convert.ToDecimal(valuepercentual);
+                                }
+                                if (rc170.VlBcIcms != 0)
+                                {
+                                    if (rc170.VlItem == 0)
                                     {
-                                        c170.VlItem = c100.VlDoc.Value;
-                                        c170.VlBcPis = c170.VlItem;
-                                        c170.VlBcCofins = c170.VlItem;
+                                        rc170.VlItem = rc170.VlBcIcms;
                                     }
                                 }
+                                if (rc170.Cfop == 1102)
+                                {
+                                    rc170.VlBcCofins = rc170.VlItem;
+                                    rc170.VlBcPis = rc170.VlItem;
+                                }
+                                else if (rc170.Cfop == 2102)
+                                {
+                                    if (contadorC170 == 1)
+                                    {
+                                        rc170.VlBcCofins = rc170.VlItem - rc170.VlIcms + Convert.ToDecimal(rc100.VlFrt);
+                                        rc170.VlBcPis = rc170.VlItem - rc170.VlIcms + Convert.ToDecimal(rc100.VlFrt);
+                                    }
+                                    else
+                                    {
+                                        rc170.VlBcCofins = rc170.VlItem - rc170.VlIcms;
+                                        rc170.VlBcPis = rc170.VlItem - rc170.VlIcms;
+                                    }
+                                }
+                                
+                            }
+                            else if (rc170.Cfop == 2202 | rc170.Cfop == 1202)
+                            {
+                                if (rc170.VlBcIcms != 0)
+                                {
+                                    if (rc170.VlItem == 0)
+                                    {
+                                        rc170.VlItem = rc170.VlBcIcms;
+                                    }
+                                }
+
+                                rc170.VlBcPis = rc170.VlItem - rc170.VlIcms;
+                                rc170.VlBcCofins = rc170.VlItem - rc170.VlIcms;
+                            }
+                            else if (rc170.VlItem != 0 && rc170.VlBcIcms != 0)
+                            {
+                                rc170.VlBcPis = rc170.VlBcIcms - rc170.VlIcms;
+                                rc170.VlBcCofins = rc170.VlBcIcms - rc170.VlIcms;
+                                rc170.AliqPis = 1.65M;
+                                rc170.AliqCofins = 7.60M;
+                            }
+                            rc170.VlPis = rc170.VlBcPis * Convert.ToDecimal(0.0165);
+                            rc170.VlCofins = rc170.VlBcCofins * Convert.ToDecimal(0.0760);
+
+                            if (listaFrete.IndexOf(Convert.ToString(rc100.ChvNfe)) > -1)
+                            {
+                                rc170.VlItem = Math.Round(Convert.ToDecimal(rc170.VlItem) + Convert.ToDecimal(rc100.VlFrt), 2);
+                                rc170.VlBcPis = rc170.VlItem - rc170.VlIcms;
+                                rc170.VlBcCofins = rc170.VlItem - rc170.VlIcms;
                             }
                            
+
+                            rc100_vlmercadoria = rc100_vlmercadoria + rc170.VlItem;
                         }
-                        c100.VlPis = totalPis;
-                        c100.VlCofins = totalCofins;
+                        rc100.VlMerc = rc100_vlmercadoria;
+                        rc100.VlPis = rc100_vlpis;
+                        rc100.VlCofins = rc100_vlcofins;
+                        rc100.VlMerc = rc100_vlmercadoria;
                     }
                 }
             }
@@ -1314,6 +874,27 @@ namespace ProjetoSpeds.Funções
                             c100.RegC170s.RemoveAt(i);
                         }
                         c010.RegC100s.Remove(c100);
+
+
+                    }
+                }
+            }
+           
+            foreach (RegistroD010 d010 in _SpedContribuicoes.BlocoD.RegD001.RegD010s)
+            {
+                foreach (var d100 in d010.RegD100s.ToList())
+                {
+                    if (listaId.Contains(d100.ChvCTe))
+                    {
+                        for (int i = d100.RegD101s.Count - 1; i >= 0; i--)
+                        {
+                            d100.RegD101s.RemoveAt(i);
+                        }
+                        for (int i = d100.RegD105s.Count - 1; i >= 0; i--)
+                        {
+                            d100.RegD105s.RemoveAt(i);
+                        }
+                        d010.RegD100s.Remove(d100);
 
 
                     }
@@ -1787,7 +1368,7 @@ namespace ProjetoSpeds.Funções
         }
         public void ajusteCstCofins(ArquivoEFDContribuicoes _SpedContribuicoes)
         {
-            List<string> listaCOD = new() { "16206", "16207", "16208", "16211", "16140", "16141", "16163", "16164", "7895345001781", "17239", "17245", "17236", "17242", "17245", "17248", "17324", "17328", "17437", "17450", "17453", "17430", "17434", "17657", "17660", "17700" };
+            List<string> listaCOD = new() { "16206", "16207", "16208", "16211", "16140", "16141", "16163", "16164", "7895345001781", "17239", "17245", "17236", "17242", "17245", "17248", "17324", "17328", "17437", "17450", "17453", "17430", "17434", "17657", "17660", "17700","17921" };
             List<string> listaCODAzeite = new() { "16126", "16127" };
             foreach (FiscalBr.EFDContribuicoes.BlocoC.RegistroC010 r010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
             {
@@ -1887,6 +1468,28 @@ namespace ProjetoSpeds.Funções
                 }
             }
 
+        }
+        public void ajusteTemporario(ArquivoEFDContribuicoes _SpedContribuicoes)
+        {
+            foreach (RegistroC010 rc010 in _SpedContribuicoes.BlocoC.RegC001.RegC010s)
+            {
+                foreach (var c100 in rc010.RegC100s)
+                {
+                    if (c100.RegC170s is not null)
+                    {
+                        if (rc010.Cnpj == "24867555000608") {
+                            foreach (var c170 in c100.RegC170s)
+                            {
+                                if (c170.Cfop == 5102 || c170.Cfop == 6102 || c170.Cfop == 6108 || c170.Cfop == 6106 || c170.Cfop == 5106)
+                                {
+                                    c170.VlItem = c170.VlItem + c170.VlIcms;
+                                    c170.VlBcCofins = c170.VlBcCofins + c170.VlIcms;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

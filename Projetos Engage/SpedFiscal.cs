@@ -90,7 +90,6 @@ namespace ProjetoSpeds
                 ajustesFuncoes.ajusteIEFiscal(this._Sped);
                 VerificaCb = true;
             }
-           
             if (CbGerarReg.Checked)
             {
                 ajustesFuncoes.registrofaltamcontri(this._Sped);

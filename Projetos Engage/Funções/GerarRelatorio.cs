@@ -123,37 +123,12 @@ namespace ProjetoSpeds.Funções
                                                            $"{rd101.VlItem};" +
                                                            "-;" +
                                                            "-;" +
-                                                           $"{rd101.VlBcPis};" +
+                                                           "-;" +
                                                            $"{rd101.AliqPis};" +
                                                            $"{rd101.VlPis};" +
                                                            $"{rd101.CstPis};" +
                                                            "-;" +
-                                                           "-;" +
-                                                           "-;" +
-                                                           "-;" +
-                                                           "-;" +
-                                                           "-;"
-                                                          );
-                            }
-                            foreach (RegistroD105 rd105 in rd100.RegD105s)
-                            {
-                                RelatorioSped.AppendLine("BLOCO D105;" +
-                                                           $"{rd010.Cnpj};" +
-                                                           $"{rd100.NumDoc};" +
-                                                           $"{rd100.IndOper};" +
-                                                           $"{rd100.ChvCTe};" +
-                                                           "-;" +
-                                                           "-;" +
-                                                           "-;" +
-                                                           $"{rd105.VlItem};" +
-                                                           "-;" +
-                                                           "-;" +
-                                                           $"{rd105.VlBcCofins};" +
-                                                           $"{rd105.AliqCofins};" +
-                                                           $"{rd105.VlCofins};" +
-                                                           $"{rd105.CstCofins};" +
-                                                           "-;" +
-                                                           "-;" +
+                                                           $"{rd101.VlBcPis};" +
                                                            "-;" +
                                                            "-;" +
                                                            "-;" +

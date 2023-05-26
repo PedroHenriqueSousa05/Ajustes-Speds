@@ -47,12 +47,6 @@ namespace ProjetoSpeds
                 VerificaCb = true;
             }
 
-            if (CbAjustec170.Checked)
-            {
-                ajustesFuncoes.ajusteC170(this._SpedContribuicoes);
-                VerificaCb = true;
-            }
-            
             if (CbAjuste0150.Checked)
             {
                 ajustesFuncoes.ajuste0150(this._SpedContribuicoes);
@@ -106,7 +100,6 @@ namespace ProjetoSpeds
                 ajustesFuncoes.ajuste0200(this._SpedContribuicoes);
                 VerificaCb = true;
             }
-
             if (CbAjusteCcst.Checked)
             {
                 ajustesFuncoes.ajusteCstC170(this._SpedContribuicoes);
@@ -123,14 +116,14 @@ namespace ProjetoSpeds
                 ajustesFuncoes.excluirCFOPsListados(this._SpedContribuicoes);
                 VerificaCb = true;
             }
-            if (CbAjustePneus.Checked)
-            {
-                ajustesFuncoes.ajusteCstCofins(this._SpedContribuicoes);
-                VerificaCb = true;
-            }
             if (CbAjustePisConfins.Checked)
             {
                 ajustesFuncoes.corrgirVlPisCofins(this._SpedContribuicoes);
+                VerificaCb = true;
+            }
+            if (CbAjustePneus.Checked)
+            {
+                ajustesFuncoes.ajusteCstCofins(this._SpedContribuicoes);
                 VerificaCb = true;
             }
             if (CbGerarTxt.Checked)
@@ -143,9 +136,8 @@ namespace ProjetoSpeds
                 relatorio.relatorioCSV(this._SpedContribuicoes);
                 
             }
-            //ajustesFuncoes.ajusteD100(this._SpedContribuicoes);
-            //ajustesFuncoes.bloco0Redundante(this._SpedContribuicoes);
-
+            //ajustesFuncoes.ajusteTemporario(this._SpedContribuicoes);
+            //VerificaCb = true;
             if (VerificaCb)
             {
                 gravarArquivo.ExecSped(this._SpedContribuicoes, this);

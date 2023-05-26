@@ -31,7 +31,6 @@
             this.BtnSelSpedContribucoes = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.CbAjustec100 = new System.Windows.Forms.CheckBox();
-            this.CbAjustec170 = new System.Windows.Forms.CheckBox();
             this.CbAjuste0150 = new System.Windows.Forms.CheckBox();
             this.CbAjusted500 = new System.Windows.Forms.CheckBox();
             this.CbRelatorio = new System.Windows.Forms.CheckBox();
@@ -87,17 +86,6 @@
             this.CbAjustec100.TabIndex = 2;
             this.CbAjustec100.Text = "Registro C100";
             this.CbAjustec100.UseVisualStyleBackColor = true;
-            // 
-            // CbAjustec170
-            // 
-            this.CbAjustec170.AutoSize = true;
-            this.CbAjustec170.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CbAjustec170.Location = new System.Drawing.Point(51, 128);
-            this.CbAjustec170.Name = "CbAjustec170";
-            this.CbAjustec170.Size = new System.Drawing.Size(97, 19);
-            this.CbAjustec170.TabIndex = 3;
-            this.CbAjustec170.Text = "Registro C170";
-            this.CbAjustec170.UseVisualStyleBackColor = true;
             // 
             // CbAjuste0150
             // 
@@ -275,7 +263,7 @@
             // 
             this.CbAjusteCcst.AutoSize = true;
             this.CbAjusteCcst.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CbAjusteCcst.Location = new System.Drawing.Point(51, 153);
+            this.CbAjusteCcst.Location = new System.Drawing.Point(51, 128);
             this.CbAjusteCcst.Name = "CbAjusteCcst";
             this.CbAjusteCcst.Size = new System.Drawing.Size(98, 19);
             this.CbAjusteCcst.TabIndex = 22;
@@ -297,7 +285,7 @@
             // 
             this.CbAjustePisConfins.AutoSize = true;
             this.CbAjustePisConfins.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CbAjustePisConfins.Location = new System.Drawing.Point(451, 203);
+            this.CbAjustePisConfins.Location = new System.Drawing.Point(51, 153);
             this.CbAjustePisConfins.Name = "CbAjustePisConfins";
             this.CbAjustePisConfins.Size = new System.Drawing.Size(115, 19);
             this.CbAjustePisConfins.TabIndex = 24;
@@ -308,7 +296,7 @@
             // 
             this.CbExcluirCFOP.AutoSize = true;
             this.CbExcluirCFOP.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CbExcluirCFOP.Location = new System.Drawing.Point(451, 228);
+            this.CbExcluirCFOP.Location = new System.Drawing.Point(451, 198);
             this.CbExcluirCFOP.Name = "CbExcluirCFOP";
             this.CbExcluirCFOP.Size = new System.Drawing.Size(98, 19);
             this.CbExcluirCFOP.TabIndex = 25;
@@ -319,7 +307,7 @@
             // 
             this.CbAjustePneus.AutoSize = true;
             this.CbAjustePneus.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CbAjustePneus.Location = new System.Drawing.Point(451, 253);
+            this.CbAjustePneus.Location = new System.Drawing.Point(451, 223);
             this.CbAjustePneus.Name = "CbAjustePneus";
             this.CbAjustePneus.Size = new System.Drawing.Size(118, 19);
             this.CbAjustePneus.TabIndex = 26;
@@ -365,7 +353,6 @@
             this.Controls.Add(this.CbRelatorio);
             this.Controls.Add(this.CbAjusted500);
             this.Controls.Add(this.CbAjuste0150);
-            this.Controls.Add(this.CbAjustec170);
             this.Controls.Add(this.CbAjustec100);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnSelSpedContribucoes);
@@ -381,7 +368,6 @@
         private Button BtnSelSpedContribucoes;
         private Label label1;
         private CheckBox CbAjustec100;
-        private CheckBox CbAjustec170;
         private CheckBox CbAjuste0150;
         private CheckBox CbAjusted500;
         private CheckBox CbRelatorio;
