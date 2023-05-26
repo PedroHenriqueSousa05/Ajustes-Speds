@@ -781,8 +781,9 @@ namespace ProjetoSpeds.Funções
                                 rc170.VlBcPis = rc170.VlItem - rc170.VlIcms;
                                 rc170.VlBcCofins = rc170.VlItem - rc170.VlIcms;
                             }
-                           
 
+                            rc100_vlpis = rc100_vlpis + rc170.VlPis;
+                            rc100_vlcofins = rc100_vlcofins + rc170.VlCofins;
                             rc100_vlmercadoria = rc100_vlmercadoria + rc170.VlItem;
                         }
                         rc100.VlMerc = rc100_vlmercadoria;
